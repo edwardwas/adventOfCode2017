@@ -1,6 +1,6 @@
 module Main where
 
-import           Data.Char
+import           Data.Char (isNumber)
 
 readInput :: IO [Int]
 readInput = map (read . pure) . filter isNumber <$> readFile "input.txt"
