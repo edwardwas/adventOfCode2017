@@ -1,6 +1,8 @@
+{-# LANGUAGE TemplateHaskell #-}
 module Main where
 
-import           Data.Char (isNumber)
+import           Data.Char      (isNumber)
+import           Data.FileEmbed
 
 readInput :: IO [Int]
 readInput = map (read . pure) . filter isNumber <$> readFile "input.txt"
@@ -18,7 +20,7 @@ partB xs =
 
 main :: IO ()
 main = do
-  i <- readInput
+  let i = map (read . pure) $ filter isNumber $(embedStringFile "input.txt")
   putStrLn "Day One"
   putStr $ "\tPart A: "
   print $ partA i

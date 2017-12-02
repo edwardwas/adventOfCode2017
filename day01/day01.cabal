@@ -20,5 +20,6 @@ executable day01
   -- other-modules:       
   -- other-extensions:    
   build-depends:       base >=4.9 && <4.10
+    , file-embed
   hs-source-dirs:      src
   default-language:    Haskell2010

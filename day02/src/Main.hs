@@ -1,25 +1,20 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE TemplateHaskell            #-}
 {-# LANGUAGE TupleSections              #-}
 
 module Main where
 
 import           Data.Attoparsec.Text
+import           Data.FileEmbed
 import           Data.Maybe
 import           Data.Monoid
 import           Data.Semigroup       hiding (First, getFirst)
 import qualified Data.Text            as T
 import qualified Data.Text.IO         as T
 
-parseInput :: Integral a => Parser [[a]]
+parseInput :: Parser [[Int]]
 parseInput =
     sepBy1 (sepBy1 decimal (many1 (satisfy isHorizontalSpace))) endOfLine
-
-loadInput :: Integral a => IO [[a]]
-loadInput = do
-    d <- parseOnly parseInput <$> T.readFile "input.txt"
-    case d of
-        Left e  -> error $ "Unable load: " ++ e
-        Right x -> return x
 
 newtype MinMax a =
     MinMax (Min a, Max a)
@@ -54,7 +49,7 @@ partB = sum . map partBHelper
 
 main :: IO ()
 main = do
-  i <- loadInput
+  let Right i = parseOnly parseInput $(embedStringFile "input.txt")
   putStrLn "Day 02"
   putStr $ "\tPart A: "
   print $ partA i
