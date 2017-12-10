@@ -1,4 +1,4 @@
-{compiler}:
+{compiler ? "default"}:
 let
   defaultCompiler = "ghc802";
   makeLocalPackage = packages: name: {
