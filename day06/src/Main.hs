@@ -37,7 +37,7 @@ lengthToRepeat :: Eq a => [a] -> Int
 lengthToRepeat (x:xs) = 1 + length (takeWhile (/= x) xs)
 
 partA :: Bank Int -> Int
-partA = (\x -> x - 1) . length . untilRepeat redistribute
+partA = length . tail . untilRepeat redistribute
 
 partB :: Bank Int -> Int
 partB = lengthToRepeat . untilRepeat redistribute
