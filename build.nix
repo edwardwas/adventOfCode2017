@@ -1,6 +1,6 @@
 {compiler}:
 let
-  defaultCompiler = "ghc822";
+  defaultCompiler = "ghc802";
   makeLocalPackage = packages: name: {
     name = name;
     value = packages.callCabal2nix name (./. + "/${name}") { };
