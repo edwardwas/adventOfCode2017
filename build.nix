@@ -1,6 +1,6 @@
 {compiler ? "default"}:
 let
-  defaultCompiler = "ghc802";
+  defaultCompiler = "ghc843";
   makeLocalPackage = packages: name: {
     name = name;
     value = packages.callCabal2nix name (./. + "/${name}") { };
@@ -8,7 +8,11 @@ let
   config = {
     packageOverrides = pkgs: rec{
       haskellPackages = pkgs.haskell.packages.${if compiler == "default" then defaultCompiler else compiler}.override {
-        overrides = new: old: builtins.listToAttrs (map (makeLocalPackage new) (allDays));
+        overrides = new: old: (
+        {
+          mkDerivation = expr: old.mkDerivation (expr // {enableLibraryProfiling = true;});
+        } 
+          // builtins.listToAttrs (map (makeLocalPackage new) (allDays)));
       };
     };
   };
