@@ -7,7 +7,7 @@ version:             0.1.0.0
 -- description:         
 license:             MIT
 license-file:        LICENSE
-author:              edwardwas
+author:              Ed Wastell
 maintainer:          ed@wastell.co.uk
 -- copyright:           
 -- category:            
@@ -19,9 +19,9 @@ executable day09
   main-is:             Main.hs
   -- other-modules:       
   -- other-extensions:    
-  build-depends:       base >=4.8 && <4.11
-    , text
-    , file-embed
-    , attoparsec
+  build-depends:       base >=4.9 && <4.13
+    , recursion-schemes
+    , mtl
+    , lens
   hs-source-dirs:      src
   default-language:    Haskell2010
